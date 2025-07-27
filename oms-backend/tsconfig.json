@@ -1,0 +1,49 @@
+{
+  "compilerOptions": {
+    "target": "ES6",
+    "module": "CommonJS",
+    "outDir": "./dist",
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "typeRoots": [
+      "./node_modules/@types",
+      "./types"
+    ],
+    "types": [
+      "node",
+      "express"
+    ]
+  },
+  "include": [
+    "./**/*.ts",
+    "./types/**/*.d.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}
+// {
+//   "compilerOptions": {
+//     "target": "ES6",
+//     "module": "CommonJS",
+//     "outDir": "./dist", // Compiled JS goes into `dist/`
+//     "strict": true,
+//     "esModuleInterop": true,
+//     "forceConsistentCasingInFileNames": true,
+//     "skipLibCheck": true,
+//     "typeRoots": [
+//       "./node_modules/@types",
+//       "./types"
+//     ]
+//   },
+//   "include": [
+//     "./**/*.ts"
+//   ], // Includes all .ts files in root and subfolders
+//   "exclude": [
+//     "node_modules",
+//     "dist"
+//   ] // Exclude output and dependencies
+// }

@@ -1,0 +1,53 @@
+            productStatus:(if(paymentStatus === pending) = "placed" // order made but payment not confirmed
+                            else if(paymentStatus === fillfilled )= "picked") // order made and payment confirmed
+                            else if(paymentStatus === cancelled )= "cancelled")  // order made then cancel 
+                               ,
+
+--------------------------------------------------------------------------------------------
+register user : sample data 
+
+{
+    "email": "admin@gmail.com",
+    "password": "admin@gmail.com",
+    "name":"admin",
+    "role":"admin"
+}
+------------------------------------------------------------------------------------------------
+product list on platform: sample data 
+
+{
+  "user_id":"688498c2f870baf2cb558e4a",
+  "name": "Wireless Headphones",
+  "description": "Bluetooth noise-cancelling over-ear headphones with long battery life.",
+  "price": 129.99,
+  "stock": 50,
+  "category": "Electronics"
+}
+---------------------------------------------------------------------------------------------------
+place a new order: sample data 
+
+{
+    "customerId":"6884796de843778d28dae2e4",
+    "items": [
+      {
+        "productId":"6884a1e21ce9272235233ac0",
+        "productName": "Wireless Headphones",
+        "quantity": 3,
+        "price":100,
+        "totalAmount": 300
+      }
+    ],
+    "productStatus": "picked",
+    "paymentCollected": false,
+    "paymentStatus": "PENDING",
+    "shippingAddress": {
+      "address": "65 Salt Lake City",
+      "state": "West Bengal"
+    },
+    "statusHistory": [
+      {
+        "status": "picked",
+        "updatedBy": "6884796de843778d28dae2e4" 
+      }
+    ]
+  }
