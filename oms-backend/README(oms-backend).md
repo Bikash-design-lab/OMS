@@ -5,7 +5,7 @@
 A TypeScript-based backend for managing users, products, and orders with role-based access control using Node.js, Express, and MongoDB.
 
 ---
-# [POSTMAN DOCUMENTATION]:(https://documenter.getpostman.com/view/39573479/2sB3B7Mt8q)
+# (POSTMAN DOCUMENTATION):[https://documenter.getpostman.com/view/39573479/2sB3B7Mt8q]
 
 ## 🌍 Base URL
 ```
