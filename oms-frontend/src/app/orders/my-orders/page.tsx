@@ -44,6 +44,7 @@ export default function MyOrdersPage() {
                 setError(data.message || "Failed to fetch your orders.")
             }
         } catch (err) {
+            console.error(err)
             setError("Network error. Could not fetch your orders.")
         } finally {
             setIsLoading(false)
@@ -70,6 +71,7 @@ export default function MyOrdersPage() {
                 setError(data.message || "Failed to cancel order item.")
             }
         } catch (err) {
+            console.error(err)
             setError("Network error. Could not cancel order item.")
         } finally {
             setIsLoading(false)
@@ -102,6 +104,7 @@ export default function MyOrdersPage() {
                 fetchMyOrders() // Refresh list
             }
         } catch (err) {
+            console.error(err)
             setError("Network error. Could not cancel order.")
         } finally {
             setIsLoading(false)
@@ -165,24 +168,17 @@ export default function MyOrdersPage() {
                                                         {order.paymentStatus === "PENDING" && (
                                                             <DropdownMenuItem
                                                                 onClick={() => {
-                                                                    // NOTE: This assumes the customer can mark their own order as paid.
-                                                                    // Your backend's /product-placed-payment-paid/:order_id endpoint
-                                                                    // sets paymentCollected: false, which might be a logical inconsistency.
-                                                                    // It also doesn't take a product_id, implying it affects the whole order.
-                                                                    // If payment is handled externally, this might be a confirmation step.
                                                                     alert(
                                                                         "Simulating payment confirmation. Please ensure your backend handles actual payment processing.",
                                                                     )
-                                                                    // You would typically integrate with a payment gateway here.
-                                                                    // For now, we'll call the backend endpoint to update status.
-                                                                    // This call will update the paymentStatus to PAID and paymentCollected to false as per your backend.
                                                                     fetch(API_ENDPOINTS.ORDER_PAYMENT_PAID(order._id), {
                                                                         method: "PATCH",
                                                                         headers: getAuthHeaders(),
                                                                     })
-                                                                        .then((res) => res.json())
-                                                                        .then((data) => {
-                                                                            if (res.ok) {
+                                                                        .then(async (res) => {
+                                                                            const isOk = res.ok
+                                                                            const data = await res.json()
+                                                                            if (isOk) {
                                                                                 alert(data.message || "Order marked as paid!")
                                                                                 fetchMyOrders()
                                                                             } else {
@@ -190,6 +186,7 @@ export default function MyOrdersPage() {
                                                                             }
                                                                         })
                                                                         .catch(() => alert("Network error during payment confirmation."))
+
                                                                 }}
                                                             >
                                                                 Mark as Paid

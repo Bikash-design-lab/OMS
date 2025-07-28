@@ -50,11 +50,10 @@ export interface Order {
     updatedAt: Date
 }
 
-export interface ApiResponse<T = unknown> {
+export interface ApiResponse<T = Record<string, unknown>> {
     message: string
     user?: User
     token?: string
     details?: T
     order?: Order
 }
-

@@ -60,8 +60,7 @@ export default function ProductsPage() {
                 setError(data.message || "Failed to fetch products.")
             }
         } catch (err) {
-            console.log(err)
-
+            console.error(err)
             setError("Network error. Could not fetch products.")
         } finally {
             setIsLoading(false)
@@ -106,7 +105,7 @@ export default function ProductsPage() {
                 setError(data.message || "Failed to delete product.")
             }
         } catch (err) {
-            console.log(err)
+            console.error(err)
             setError("Network error. Could not delete product.")
         } finally {
             setIsLoading(false)
@@ -159,7 +158,7 @@ export default function ProductsPage() {
                 setFormError(data.message || "Failed to save product.")
             }
         } catch (err) {
-            console.log(err)
+            console.error(err)
             setFormError("Network error. Could not save product.")
         } finally {
             setIsFormLoading(false)
