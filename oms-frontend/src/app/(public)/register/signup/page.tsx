@@ -55,7 +55,7 @@ export default function SignupPage() {
                 setError(data.message || "Failed to create account")
             }
         } catch (err) {
-            setError("Network error. Please try again.")
+            setError(`Something went wrong: ${err}`)
         } finally {
             setIsLoading(false)
         }

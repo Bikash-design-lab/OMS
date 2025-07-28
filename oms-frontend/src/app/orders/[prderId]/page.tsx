@@ -30,24 +30,27 @@ export default function OrderDetailsPage() {
             setIsLoading(false)
         }
     }, [orderId])
-
     const fetchOrderDetails = async (id: string) => {
         setIsLoading(true)
         setError(null)
         try {
             const headers = getAuthHeaders()
-            // NOTE: This endpoint (ORDER_BY_ID) is assumed and not provided in your backend documentation.
-            // You would need to implement a GET /order/:order_id endpoint on your backend.
+            // const response = await fetch(API_ENDPOINTS.ORDER_BY_ID(id), { headers })
+            // const data: ApiResponse<Order> = await response.json()
             const response = await fetch(API_ENDPOINTS.ORDER_BY_ID(id), { headers })
+            const contentType = response.headers.get("content-type")
+            if (!contentType || !contentType.includes("application/json")) {
+                const text = await response.text()
+                throw new Error(`Expected JSON but received: ${text}`)
+            }
             const data: ApiResponse<Order> = await response.json()
-
             if (response.ok && data.order) {
                 setOrder(data.order)
             } else {
                 setError(data.message || "Failed to fetch order details.")
             }
         } catch (err) {
-            setError("Network error. Could not fetch order details.")
+            setError(`Network error. Could not fetch order details. ${err}`)
         } finally {
             setIsLoading(false)
         }
@@ -86,7 +89,7 @@ export default function OrderDetailsPage() {
                 setError(data.message || `Failed to update order status to ${statusType}.`)
             }
         } catch (err) {
-            setError("Network error. Could not update order status.")
+            setError(`Network error. Could not update order status: ${err}`)
         } finally {
             setIsLoading(false)
         }
@@ -113,7 +116,7 @@ export default function OrderDetailsPage() {
                 setError(data.message || "Failed to cancel order item.")
             }
         } catch (err) {
-            setError("Network error. Could not cancel order item.")
+            setError(`Network error. Could not cancel order item: ${err}`)
         } finally {
             setIsLoading(false)
         }
