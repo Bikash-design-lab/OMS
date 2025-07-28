@@ -88,7 +88,6 @@ export default function ProductsPage() {
 
     const handleDeleteProduct = async (productId: string) => {
         if (!confirm("Are you sure you want to delete this product?")) return
-
         setIsLoading(true)
         setError(null)
         try {
@@ -100,7 +99,7 @@ export default function ProductsPage() {
             const data: ApiResponse = await response.json()
             if (response.ok) {
                 alert(data.message || "Product deleted successfully!")
-                fetchProducts() // Refresh list
+                fetchProducts()
             } else {
                 setError(data.message || "Failed to delete product.")
             }
@@ -126,8 +125,7 @@ export default function ProductsPage() {
         try {
             const headers = getAuthHeaders()
             let response: Response
-            let data: ApiResponse
-
+            // let data: ApiResponse
             if (currentProduct) {
                 // Update product
                 response = await fetch(API_ENDPOINTS.PRODUCT_UPDATE(currentProduct._id), {
@@ -149,8 +147,7 @@ export default function ProductsPage() {
                 })
             }
 
-            data = await response.json()
-
+            const data = await response.json()
             if (response.ok) {
                 alert(data.message || "Product saved successfully!")
                 setIsModalOpen(false)
@@ -166,7 +163,6 @@ export default function ProductsPage() {
     }
 
     const isAdminOrStaff = user && (user.role === "admin" || user.role === "staff")
-
     return (
         <DashboardLayout>
             <div className="px-4 py-6 sm:px-0">

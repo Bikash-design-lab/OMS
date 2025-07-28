@@ -18,7 +18,7 @@ import { orderRouter } from './Routes/order.routes';
 const app: Application = express();
 const PORT: number = parseInt(process.env.PORT || '5000', 10);
 app.use(cors({
-    origin: 'https://oms-5j7u.onrender.com',
+    origin: 'http://localhost:3001',
     credentials: true, // if you're sending cookies or authentication
 }));
 // Ensure log directory exists

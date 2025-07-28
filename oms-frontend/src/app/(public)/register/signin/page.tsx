@@ -52,7 +52,7 @@ export default function SigninPage() {
                 setError(data.message || "Invalid credentials")
             }
         } catch (err) {
-            setError("Network error. Please try again.")
+            setError(`Network error. Please try again, ${err}`)
         } finally {
             setIsLoading(false)
         }
