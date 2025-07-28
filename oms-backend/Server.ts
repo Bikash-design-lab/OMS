@@ -5,9 +5,10 @@ import morgan from 'morgan';
 import { ENV } from './Config/env';
 // console.log(ENV.MONGODB_URI);
 // import '../oms-backend/types/express/index'; // TEMP only
-
+import dotenv from 'dotenv';
+dotenv.config();
 // import dotenv from 'dotenv';
-// import cors from 'cors'; // Uncomment if needed
+import cors from 'cors';
 import { ConnectToDB } from './Config/db';
 import { userRoute } from './Routes/user.routes';
 import { productRouter } from './Routes/product.routes'
@@ -16,7 +17,10 @@ import { orderRouter } from './Routes/order.routes';
 
 const app: Application = express();
 const PORT: number = parseInt(process.env.PORT || '5000', 10);
-
+app.use(cors({
+    origin: 'http://localhost:3001',
+    credentials: true, // if you're sending cookies or authentication
+}));
 // Ensure log directory exists
 const logDirectory = path.join(__dirname, 'Logs');
 if (!fs.existsSync(logDirectory)) {
@@ -32,6 +36,8 @@ const accessLogStream = fs.createWriteStream(
 // Middlewares
 app.use(morgan('combined', { stream: accessLogStream }));
 app.use(express.json());
+// app.use(cors())
+
 
 // Health check
 app.get('/healthyz', (req: Request, res: Response): void => {
